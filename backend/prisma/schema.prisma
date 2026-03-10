@@ -21,5 +21,50 @@ model User {
   createdAt    DateTime     @default(now()) @map("created_at")
   updatedAt    DateTime     @updatedAt @map("updated_at")
 
+  organisation Organisation @relation(fields: [orgId], references: [id])
+
   @@map("users")
+}
+
+model Organisation {
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  users     User[]
+  products  Product[]
+  settings  Settings?
+
+  @@map("organisations")
+}
+
+model Product {
+  id                String       @id @default(uuid())
+  orgId             String       @map("org_id")
+  name              String
+  sku               String
+  description       String?
+  quantityOnHand    Int          @default(0) @map("quantity_on_hand")
+  costPrice         Decimal?     @map("cost_price") @db.Decimal(10, 2)
+  sellingPrice      Decimal?     @map("selling_price") @db.Decimal(10, 2)
+  lowStockThreshold Int?         @map("low_stock_threshold")
+  createdAt         DateTime     @default(now()) @map("created_at")
+  updatedAt         DateTime     @updatedAt @map("updated_at")
+
+  organisation      Organisation @relation(fields: [orgId], references: [id])
+
+  @@unique([orgId, sku])
+  @@map("products")
+}
+
+model Settings {
+  id                      String       @id @default(uuid())
+  orgId                   String       @unique @map("org_id")
+  defaultLowStockThreshold Int         @default(5) @map("default_low_stock_threshold")
+  updatedAt               DateTime     @updatedAt @map("updated_at")
+
+  organisation            Organisation @relation(fields: [orgId], references: [id])
+
+  @@map("settings")
 }

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js",
+    "db:migrate": "npx prisma migrate dev",
+    "db:generate": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
