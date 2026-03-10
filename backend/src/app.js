@@ -25,5 +25,8 @@ app.use('/api/v1/user' , router)
 import Productrouter from "./modules/product/product.routes.js"
 app.use('/api/v1/products' , Productrouter)
 
+//settings
+import settingsRouter from "./modules/settings/settings.router.js"
+app.use('/api/v1/settings' , settingsRouter)
 
 export default app
