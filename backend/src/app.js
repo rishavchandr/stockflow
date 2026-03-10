@@ -21,4 +21,9 @@ app.get('/health' , (req,res) => {
 import router from "./modules/auth/auth.router.js"
 app.use('/api/v1/user' , router)
 
+//product 
+import Productrouter from "./modules/product/product.routes.js"
+app.use('/api/v1/products' , Productrouter)
+
+
 export default app
