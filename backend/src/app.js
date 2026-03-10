@@ -29,4 +29,8 @@ app.use('/api/v1/products' , Productrouter)
 import settingsRouter from "./modules/settings/settings.router.js"
 app.use('/api/v1/settings' , settingsRouter)
 
+//dasboard
+import dashBoardRouter from "./modules/dashboard/dasboard.router.js"
+app.use('/api/v1/dashboard' , dashBoardRouter)
+
 export default app
